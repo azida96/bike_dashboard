@@ -14,6 +14,17 @@ import seaborn as sns
 
 
 df = pd.read_csv("train.csv")
+st.title("Bike Rental Dashboard")
+
+# ---- INTERACTIVE DROPDOWN ----
+selected_year = st.selectbox(
+    "Select Year",
+    sorted(df["year"].unique())
+)
+
+# Filter data based on selected year
+filtered_df = df[df["year"] == selected_year]
+
 df.head()
 
 df["datetime"] = pd.to_datetime(df["datetime"])
@@ -43,7 +54,7 @@ df.groupby("workingday")[["registered", "casual"]].mean()
 
 
 
-monthly = df.groupby(["year", "month"])["count"].sum()
+monthly = filtered_df.groupby(["year", "month"])["count"].sum()
 monthly
 
 df.groupby("weather")["count"].mean()
@@ -257,16 +268,18 @@ sns.heatmap(
 
 plt.title("Correlation Heatmap of Numerical Variables")
 plt.show()
-st.subheader("Test Plot: Mean Rentals by Hour")
-
-import matplotlib.pyplot as plt
+st.subheader("Mean Rentals by Hour (Interactive)")
 
 fig, ax = plt.subplots()
-df.groupby("hour")["count"].mean().plot(ax=ax)
+filtered_df.groupby("hour")["count"].mean().plot(ax=ax)
 ax.set_xlabel("Hour")
 ax.set_ylabel("Mean Rentals")
+ax.set_title(f"Year: {selected_year}")
+st.write("Change the year from the dropdown to see the graph update.")
+
 
 st.pyplot(fig)
+
 st.subheader("Mean Rentals by Month")
 
 fig2, ax2 = plt.subplots()
