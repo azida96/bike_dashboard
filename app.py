@@ -21,26 +21,27 @@ st.title("Bike Rental Dashboard")
 # ===============================
 # ALL SLICERS (FILTERS)
 # ===============================
-st.subheader("Search Filters")
+st.sidebar.header("Filters")
 
-year = st.selectbox(
+year = st.sidebar.selectbox(
     "Select Year",
     sorted(df["year"].unique())
 )
 
-month = st.selectbox(
+month = st.sidebar.selectbox(
     "Select Month",
     sorted(df["month"].unique())
 )
 
-hour_range = st.slider(
+hour_range = st.sidebar.slider(
     "Select Hour Range",
     min_value=0,
     max_value=23,
     value=(0, 23)
 )
 
-working_day = st.checkbox("Show only working days")
+working_day = st.sidebar.checkbox("Show only working days")
+
 
 # ===============================
 # APPLY FILTERS
