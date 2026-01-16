@@ -78,7 +78,7 @@ st.dataframe(plot_df.head(20))
 st.subheader("Mean Rentals by Hour")
 
 fig1, ax1 = plt.subplots()
-plot_df.groupby("hour")["count"].mean().plot(ax=ax)
+plot_df.groupby("hour")["count"].mean().plot(ax=ax1)
 ax1.set_xlabel("Hour")
 ax1.set_ylabel("Mean Rentals")
 st.pyplot(fig1)
