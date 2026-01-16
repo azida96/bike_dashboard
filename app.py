@@ -59,7 +59,7 @@ df.groupby("workingday")[["registered", "casual"]].mean()
 
 
 
-monthly = filtered_df.groupby(["year", "month"])["count"].sum()
+monthly = df.groupby(["year", "month"])["count"].sum()
 monthly
 
 df.groupby("weather")["count"].mean()
