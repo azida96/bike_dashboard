@@ -17,6 +17,9 @@ df = pd.read_csv("train.csv")
 # CREATE datetime and year FIRST
 df["datetime"] = pd.to_datetime(df["datetime"])
 df["year"] = df["datetime"].dt.year
+df["month"] = df["datetime"].dt.month
+df["hour"] = df["datetime"].dt.hour
+
 
 st.title("Bike Rental Dashboard")
 
