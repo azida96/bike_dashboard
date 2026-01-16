@@ -43,7 +43,9 @@ hour_range = st.sidebar.slider(
 )
 
 working_day = st.sidebar.checkbox("Show only working days")
-show_filtered = st.checkbox("Show filtered data (use slicers)")
+
+show_filtered = st.sidebar.checkbox("Show filtered data (use slicers)")
+
 
 
 
