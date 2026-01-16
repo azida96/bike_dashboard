@@ -41,6 +41,9 @@ hour_range = st.sidebar.slider(
 )
 
 working_day = st.sidebar.checkbox("Show only working days")
+st.subheader("Filtered Data Table")
+st.dataframe(filtered_df.head(20))
+
 
 
 # ===============================
