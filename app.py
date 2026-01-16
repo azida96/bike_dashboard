@@ -41,6 +41,8 @@ hour_range = st.sidebar.slider(
 )
 
 working_day = st.sidebar.checkbox("Show only working days")
+show_filtered = st.checkbox("Show filtered data (use slicers)")
+
 
 
 
@@ -56,9 +58,12 @@ filtered_df = df[
 
 if working_day:
     filtered_df = filtered_df[filtered_df["workingday"] == 1]
+    plot_df = filtered_df if show_filtered else df
+
 
 st.subheader("Bike rental dataset preview")
-st.dataframe(filtered_df.head(20))
+st.dataframe(plot_df.head(20))
+
 
 # ===============================
 # GRAPH 1 (INTERACTIVE)
@@ -66,7 +71,7 @@ st.dataframe(filtered_df.head(20))
 st.subheader("Mean Rentals by Hour")
 
 fig1, ax1 = plt.subplots()
-filtered_df.groupby("hour")["count"].mean().plot(ax=ax1)
+plot_df.groupby("hour")["count"].mean().plot(ax=ax)
 ax1.set_xlabel("Hour")
 ax1.set_ylabel("Mean Rentals")
 st.pyplot(fig1)
@@ -77,7 +82,7 @@ st.pyplot(fig1)
 st.subheader("Mean Rentals by Month")
 
 fig2, ax2 = plt.subplots()
-filtered_df.groupby("month")["count"].mean().plot(marker="o", ax=ax2)
+plot_df.groupby("month")["count"].mean().plot(marker="o", ax=ax2)
 ax2.set_xlabel("Month")
 ax2.set_ylabel("Mean Rentals")
 st.pyplot(fig2)
@@ -88,13 +93,7 @@ st.pyplot(fig2)
 st.subheader("Mean Rentals by Weather")
 
 fig3, ax3 = plt.subplots()
-sns.barplot(
-    data=filtered_df,
-    x="weather",
-    y="count",
-    errorbar=("ci", 95),
-    ax=ax3
-)
+sns.barplot(data=plot_df, x="weather", y="count", ax=ax3)
 st.pyplot(fig3)
 
 # ===============================
@@ -103,9 +102,5 @@ st.pyplot(fig3)
 st.subheader("Correlation Heatmap")
 
 fig4, ax4 = plt.subplots(figsize=(8, 6))
-sns.heatmap(
-    filtered_df.corr(numeric_only=True),
-    cmap="coolwarm",
-    ax=ax4
-)
+sns.heatmap(plot_df.corr(numeric_only=True), ax=ax4)
 st.pyplot(fig4)
