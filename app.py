@@ -57,7 +57,7 @@ filtered_df = df[
 if working_day:
     filtered_df = filtered_df[filtered_df["workingday"] == 1]
 
-st.subheader("Filtered Data Table")
+st.subheader("Bike rental dataset preview")
 st.dataframe(filtered_df.head(20))
 
 # ===============================
