@@ -13,6 +13,8 @@ df["year"] = df["datetime"].dt.year
 df["month"] = df["datetime"].dt.month
 df["hour"] = df["datetime"].dt.hour
 
+
+
 # ===============================
 # TITLE
 # ===============================
@@ -47,6 +49,7 @@ show_filtered = st.checkbox("Show filtered data (use slicers)")
 
 
 
+
 # ===============================
 # APPLY FILTERS
 # ===============================
@@ -58,7 +61,11 @@ filtered_df = df[
 
 if working_day:
     filtered_df = filtered_df[filtered_df["workingday"] == 1]
-    plot_df = filtered_df if show_filtered else df
+
+plot_df = filtered_df if show_filtered else df
+
+    
+
 
 
 st.subheader("Bike rental dataset preview")
