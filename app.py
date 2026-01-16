@@ -24,3 +24,35 @@ ax.set_ylabel("Mean Rentals")
 ax.set_title(f"Year: {year}")
 
 st.pyplot(fig)
+st.subheader("Mean Bike Rentals by Month")
+
+fig2, ax2 = plt.subplots()
+filtered_df.groupby("month")["count"].mean().plot(marker="o", ax=ax2)
+ax2.set_xlabel("Month")
+ax2.set_ylabel("Mean Rentals")
+ax2.set_title(f"Year: {year}")
+
+st.pyplot(fig2)
+st.subheader("Mean Bike Rentals by Weather")
+
+fig3, ax3 = plt.subplots()
+sns.barplot(
+    data=filtered_df,
+    x="weather",
+    y="count",
+    errorbar=("ci", 95),
+    ax=ax3
+)
+ax3.set_xlabel("Weather")
+ax3.set_ylabel("Mean Rentals")
+
+st.pyplot(fig3)
+st.subheader("Correlation Heatmap")
+
+fig4, ax4 = plt.subplots(figsize=(8, 6))
+sns.heatmap(
+    filtered_df.corr(numeric_only=True),
+    cmap="coolwarm",
+    ax=ax4
+)
+st.pyplot(fig4)
