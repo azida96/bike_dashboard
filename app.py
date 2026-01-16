@@ -14,6 +14,10 @@ import seaborn as sns
 
 
 df = pd.read_csv("train.csv")
+# CREATE datetime and year FIRST
+df["datetime"] = pd.to_datetime(df["datetime"])
+df["year"] = df["datetime"].dt.year
+
 st.title("Bike Rental Dashboard")
 
 # ---- INTERACTIVE DROPDOWN ----
@@ -24,6 +28,7 @@ selected_year = st.selectbox(
 
 # Filter data based on selected year
 filtered_df = df[df["year"] == selected_year]
+
 
 df.head()
 
