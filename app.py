@@ -45,4 +45,4 @@ st.subheader("Mean Bike Rentals by Hour (Interactive)")
 
 fig, ax = plt.subplots()
 filtered_df.groupby("hour")["count"].mean().plot(ax=ax)
-ax.
+
