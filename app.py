@@ -5,7 +5,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-# ===============================
+# ==============================
 # LOAD DATA (ONLY ONCE)
 # ===============================
 df = pd.read_csv("train.csv")
